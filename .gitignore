@@ -1,3 +1,4 @@
-.ipynb_checkpoints/
+.venv
+
 # Ignore Jupyter notebook checkpoints
-.ipynb_checkpoints/
+02-sagemaker-xgboost/.ipynb_checkpoints/
