@@ -22,3 +22,16 @@
 - XGBoost hyperparameter tuning
 - Endpoint management and cost control
 - Difference between local Jupyter and cloud training
+
+
+### Architecture
+![SageMaker Pipeline Architecture](./sagemaker_architecture.jpeg)
+
+### Pipeline Steps
+1. **Data Preparation**: Preprocessed Titanic dataset locally
+2. **S3 Upload**: Stored training data in S3 bucket
+3. **Training Job**: Used SageMaker XGBoost on ml.m5.xlarge instance
+4. **Model Artifact**: Trained model saved to S3 (model.tar.gz)
+5. **Endpoint Deployment**: Deployed to ml.m5.xlarge for real-time inference
+6. **Predictions**: Successfully tested with sample passengers
+7. **Cleanup**: Deleted endpoint to prevent ongoing charges
