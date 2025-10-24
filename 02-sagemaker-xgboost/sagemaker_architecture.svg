@@ -1,0 +1,138 @@
+<svg viewBox="0 0 1000 720" xmlns="http://www.w3.org/2000/svg">
+  <!-- Define styles -->
+  <defs>
+    <style>
+      .box { fill: #232F3E; stroke: #FF9900; stroke-width: 2; }
+      .s3-box { fill: #569A31; stroke: #3C6E1F; stroke-width: 2; }
+      .sagemaker-box { fill: #527FFF; stroke: #2E5FD8; stroke-width: 2; }
+      .data-box { fill: #8C4FFF; stroke: #6B3BC4; stroke-width: 2; }
+      .text { fill: white; font-family: Arial, sans-serif; font-size: 14px; text-anchor: middle; }
+      .title { fill: white; font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; text-anchor: middle; }
+      .small-text { fill: white; font-family: Arial, sans-serif; font-size: 11px; text-anchor: middle; }
+      .arrow { fill: none; stroke: #FF9900; stroke-width: 2; marker-end: url(#arrowhead); }
+      .label { fill: #FF9900; font-family: Arial, sans-serif; font-size: 12px; font-weight: bold; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#FF9900" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="500" y="30" class="title" style="font-size: 20px;">Titanic Survival Prediction - SageMaker Pipeline</text>
+
+  <!-- Step 1: Local Data Preparation -->
+  <rect x="50" y="80" width="180" height="100" class="data-box" rx="5"/>
+  <text x="140" y="110" class="title">1. Data Preparation</text>
+  <text x="140" y="135" class="small-text">train.csv (Kaggle)</text>
+  <text x="140" y="155" class="small-text">• Handle missing values</text>
+  <text x="140" y="170" class="small-text">• Encode categorical</text>
+
+  <!-- Arrow 1 -->
+  <path d="M 230 130 L 290 130" class="arrow"/>
+  <text x="245" y="115" class="label">Upload</text>
+
+  <!-- Step 2: S3 Storage -->
+  <rect x="290" y="80" width="180" height="100" class="s3-box" rx="5"/>
+  <text x="380" y="110" class="title">2. Amazon S3</text>
+  <text x="380" y="135" class="small-text">s3://bucket/titanic-xgboost/</text>
+  <text x="380" y="155" class="small-text">data/titanic_train.csv</text>
+  <text x="380" y="170" class="small-text">(891 rows, 7 columns)</text>
+
+  <!-- Arrow 2 -->
+  <path d="M 380 180 L 380 230" class="arrow"/>
+  <text x="420" y="210" class="label">Training Input</text>
+
+  <!-- Step 3: SageMaker Training -->
+  <rect x="290" y="230" width="180" height="140" class="sagemaker-box" rx="5"/>
+  <text x="380" y="260" class="title">3. SageMaker Training</text>
+  <text x="380" y="285" class="small-text">Instance: ml.m5.xlarge</text>
+  <text x="380" y="305" class="small-text">Algorithm: XGBoost 1.5</text>
+  <text x="380" y="320" class="small-text">─────────────</text>
+  <text x="380" y="335" class="small-text">objective: binary:logistic</text>
+  <text x="380" y="350" class="small-text">num_round: 100</text>
+  <text x="380" y="365" class="small-text">max_depth: 5, eta: 0.2</text>
+
+  <!-- Arrow 3 -->
+  <path d="M 380 370 L 380 420" class="arrow"/>
+  <text x="430" y="400" class="label">Model Artifact</text>
+
+  <!-- Step 4: Model Storage -->
+  <rect x="290" y="420" width="180" height="80" class="s3-box" rx="5"/>
+  <text x="380" y="450" class="title">4. Model in S3</text>
+  <text x="380" y="475" class="small-text">s3://bucket/titanic-xgboost/</text>
+  <text x="380" y="490" class="small-text">output/model.tar.gz</text>
+
+  <!-- Arrow 4 -->
+  <path d="M 470 460 L 530 460" class="arrow"/>
+  <text x="485" y="445" class="label">Deploy</text>
+
+  <!-- Step 5: Endpoint -->
+  <rect x="530" y="400" width="180" height="140" class="sagemaker-box" rx="5"/>
+  <text x="620" y="430" class="title">5. SageMaker Endpoint</text>
+  <text x="620" y="455" class="small-text">Instance: ml.m5.xlarge</text>
+  <text x="620" y="475" class="small-text">Status: InService</text>
+  <text x="620" y="490" class="small-text">─────────────</text>
+  <text x="620" y="505" class="small-text">Real-time predictions</text>
+  <text x="620" y="525" class="small-text">REST API endpoint</text>
+
+  <!-- Arrow 5 -->
+  <path d="M 710 470 L 770 470" class="arrow"/>
+  <text x="725" y="455" class="label">Predict</text>
+
+  <!-- Step 6: Predictions -->
+  <rect x="770" y="420" width="180" height="100" class="data-box" rx="5"/>
+  <text x="860" y="450" class="title">6. Predictions</text>
+  <text x="860" y="475" class="small-text">Input: [3,0,22,1,0,7.25]</text>
+  <text x="860" y="495" class="small-text">Output: 0.15 (15% survival)</text>
+  <text x="860" y="510" class="small-text">Result: Likely died</text>
+
+  <!-- IAM Role Box -->
+  <rect x="50" y="420" width="180" height="80" class="box" rx="5"/>
+  <text x="140" y="450" class="title">IAM Execution Role</text>
+  <text x="140" y="475" class="small-text">Permissions for:</text>
+  <text x="140" y="490" class="small-text">S3, SageMaker, CloudWatch</text>
+
+  <!-- Dotted line to training -->
+  <path d="M 230 460 L 290 300" stroke="#FF9900" stroke-width="1" stroke-dasharray="5,5" fill="none"/>
+
+  <!-- CloudWatch Logs -->
+  <rect x="530" y="230" width="180" height="80" class="box" rx="5"/>
+  <text x="620" y="260" class="title">CloudWatch Logs</text>
+  <text x="620" y="285" class="small-text">Training metrics (AUC)</text>
+  <text x="620" y="300" class="small-text">Endpoint monitoring</text>
+
+  <!-- Dotted line to CloudWatch -->
+  <path d="M 470 285 L 530 270" stroke="#FF9900" stroke-width="1" stroke-dasharray="5,5" fill="none"/>
+
+  <!-- Cleanup Note -->
+  <rect x="770" y="560" width="180" height="60" class="box" rx="5" stroke="#FF4444" stroke-width="3"/>
+  <text x="860" y="585" class="title" fill="#FF4444">7. Cleanup</text>
+  <text x="860" y="605" class="small-text">predictor.delete_endpoint()</text>
+
+  <!-- Arrow to cleanup -->
+  <path d="M 710 520 L 770 590" stroke="#FF4444" stroke-width="2" stroke-dasharray="5,5" fill="none" marker-end="url(#arrowhead-red)"/>
+  <marker id="arrowhead-red" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+    <polygon points="0 0, 10 3, 0 6" fill="#FF4444" />
+  </marker>
+
+  <!-- Cost indicator -->
+  <text x="860" y="645" class="small-text" fill="#FF9900">⚠ Prevents ongoing charges</text>
+
+  <!-- Legend -->
+  <text x="50" y="590" class="text" text-anchor="start" style="font-weight: bold;">Key Components:</text>
+  <rect x="50" y="605" width="120" height="18" class="data-box"/>
+  <text x="110" y="618" class="small-text">Local/Data Prep</text>
+  
+  <rect x="190" y="605" width="90" height="18" class="s3-box"/>
+  <text x="235" y="618" class="small-text">Amazon S3</text>
+  
+  <rect x="300" y="605" width="90" height="18" class="sagemaker-box"/>
+  <text x="345" y="618" class="small-text">SageMaker</text>
+  
+  <rect x="410" y="605" width="100" height="18" class="box"/>
+  <text x="460" y="618" class="small-text">AWS Services</text>
+
+  <!-- Timing annotations -->
+  <text x="380" y="390" class="small-text" fill="#00FF00">⏱ 2-5 minutes</text>
+  <text x="620" y="560" class="small-text" fill="#00FF00">⏱ 5-8 minutes</text>
+</svg>
