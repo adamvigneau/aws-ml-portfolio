@@ -57,3 +57,6 @@ Shows transition from Data Engineer to ML Engineer:
 - Add unit tests for ETL logic
 - Set up Step Functions for orchestration
 - Add data versioning with S3 versioning
+
+### Architecture
+![AWS Glue Architecture](./glue_architecture.jpeg)
