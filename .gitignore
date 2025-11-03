@@ -1,1 +1,8 @@
 .venv
+mnist_tests_xgb.csv
+mnist_train_xgb.csv
+test_data.npy
+test_labels.npy
+train_data.npy
+train_labels.npy
+
