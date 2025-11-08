@@ -1,0 +1,20 @@
+
+Customer Complaint Form
+
+Name: Jane Doe
+Date: November 6, 2024
+Product: Widget Pro 2000
+Order ID: WP-98765
+
+Complaint:
+I'm extremely disappointed with this product. The quality is terrible and it 
+broke after just two days of normal use. I contacted customer service three 
+times and received no helpful response. The wait time was over an hour each call.
+
+This is completely unacceptable for a product at this price point. I demand a 
+full refund immediately. I will never purchase from this company again and will 
+be sharing my experience on social media.
+
+Would you recommend to others? Absolutely not
+Overall satisfaction: 1/10
+Status: URGENT - Awaiting refund

@@ -1,0 +1,29 @@
+
+Technical Support Ticket
+
+Ticket ID: SUP-45123
+Customer: Sarah Williams
+Product: Widget Pro 2000
+Date Opened: November 4, 2024
+Priority: High
+
+Issue Description:
+Device fails to connect to WiFi network after latest firmware update (v2.3.1).
+Error message displays: "Connection timeout - unable to reach server"
+
+Steps already taken:
+1. Restarted device multiple times
+2. Reset network settings
+3. Tried different WiFi networks
+4. Uninstalled and reinstalled app
+
+System Information:
+- Firmware: v2.3.1
+- App Version: 4.2.0
+- Device Model: WP2000-X
+- Location: Seattle, Washington
+
+Customer is frustrated as device is needed for work. Requesting urgent 
+technical assistance or replacement unit.
+
+Status: Open - Awaiting Technical Team Response
