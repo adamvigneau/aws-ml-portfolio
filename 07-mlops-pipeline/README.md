@@ -3,21 +3,94 @@
 An end-to-end automated machine learning operations (MLOps) pipeline using AWS services, implementing event-driven training, model registry with approval workflows, and automated deployment.
 
 ## Architecture
+
+The pipeline uses event-driven architecture with AWS serverless services to automate the entire ML lifecycle from training to deployment.
+```mermaid
+graph TB
+    subgraph "Data Layer"
+        S3_Upload[("📁 S3 Bucket<br/>training-data/")]
+        S3_Models[("📦 S3 Bucket<br/>model-artifacts/")]
+    end
+
+    subgraph "Event Processing"
+        EB1["📡 EventBridge<br/>Object Created"]
+        EB2["📡 EventBridge<br/>Training Complete"]
+        EB3["📡 EventBridge<br/>Model Approved"]
+    end
+
+    subgraph "Lambda Functions"
+        L1["⚡ Lambda 1<br/>TriggerTraining"]
+        L2["⚡ Lambda 2<br/>RegisterModel"]
+        L3["⚡ Lambda 3<br/>DeployModel"]
+    end
+
+    subgraph "SageMaker"
+        Train["🎓 Training Job<br/>XGBoost"]
+        Registry["📚 Model Registry<br/>mlops-pipeline-models"]
+        Endpoint["🌐 Production Endpoint<br/>ml.t2.medium"]
+    end
+
+    subgraph "Human Interaction"
+        User["👤 Data Scientist"]
+        Approval["✅ Manual Approval"]
+    end
+
+    subgraph "Notifications"
+        SNS["📧 SNS Topic<br/>Email Alerts"]
+    end
+
+    User -->|Upload CSV| S3_Upload
+    S3_Upload -->|Triggers| EB1
+    EB1 -->|Invokes| L1
+    L1 -->|create_training_job| Train
+    Train -->|Model Artifacts| S3_Models
+    Train -->|Completed| EB2
+    EB2 -->|Invokes| L2
+    L2 -->|Register| Registry
+    L2 -->|Notify| SNS
+    SNS -->|Email| User
+    Registry -->|PendingApproval| Approval
+    User -->|Approve| Registry
+    Registry -->|Approved| EB3
+    EB3 -->|Invokes| L3
+    L3 -->|Deploy| Endpoint
+    L3 -->|Notify| SNS
+    Endpoint -->|Predictions| User
+
+    style S3_Upload fill:#FF9900
+    style S3_Models fill:#FF9900
+    style Train fill:#00A4A6
+    style Registry fill:#00A4A6
+    style Endpoint fill:#00A4A6
+    style L1 fill:#FF9900
+    style L2 fill:#FF9900
+    style L3 fill:#FF9900
+    style SNS fill:#DD344C
+    style User fill:#5294CF
+    style Approval fill:#5294CF
 ```
-Data Upload (S3) → EventBridge → Lambda (Training)
-                                      ↓
-                              SageMaker Training
-                                      ↓
-                              EventBridge → Lambda (Register)
-                                      ↓
-                              Model Registry (Pending Approval)
-                                      ↓
-                              Manual Approval
-                                      ↓
-                              EventBridge → Lambda (Deploy)
-                                      ↓
-                              Production Endpoint
-```
+
+### Pipeline Flow
+
+1. **Data Upload** → User uploads training data to S3
+2. **Automated Training** → EventBridge triggers Lambda to start SageMaker training
+3. **Model Registration** → Completed model automatically registered in Model Registry
+4. **Manual Approval** → Data scientist reviews and approves model
+5. **Automated Deployment** → Approved model automatically deployed to endpoint
+6. **Production Serving** → Endpoint serves predictions with email notifications at each stage
+
+### Key Components
+
+| Component | Purpose | Technology |
+|-----------|---------|------------|
+| **Event Triggers** | Orchestrate pipeline | EventBridge (3 rules) |
+| **Processing** | Execute pipeline logic | Lambda (3 functions) |
+| **Training** | Train ML models | SageMaker Training Jobs |
+| **Registry** | Version control & approval | SageMaker Model Registry |
+| **Deployment** | Serve predictions | SageMaker Endpoints |
+| **Notifications** | Alert on status changes | SNS + Email |
+| **Storage** | Data & model artifacts | S3 (2 buckets) |
+| **Security** | Access control | IAM Roles |
 
 ## Features
 
