@@ -1,0 +1,41 @@
+# Sensitive configuration
+mlops_config.json
+*.json
+
+# AWS credentials
+.aws/
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+venv/
+env/
+
+# Lambda packages
+lambda_packages/
+
+# Temporary files
+*.zip
+response.json
+*.log
+
+# Fix scripts (one-time use)
+fix_*.py
+check_*.py
+test_all_formats.py
+test_endpoint_fixed.py
+test_endpoint.py
+cleanup_pipeline.py
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
