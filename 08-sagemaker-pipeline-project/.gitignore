@@ -1,0 +1,43 @@
+# AWS Credentials and Config
+*.json
+!requirements.txt
+.aws/
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+venv/
+env/
+*.venv
+pipeline-venv/
+pipeline-venv-311/
+
+# Lambda packages
+lambda_packages/
+*.zip
+
+# Temporary files
+response.json
+*.log
+*.tmp
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# S3 downloads
+evaluation.json
+model.tar.gz
