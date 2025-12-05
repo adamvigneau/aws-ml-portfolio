@@ -1,0 +1,12 @@
+{
+  "endpoint_name": "mme-demo-endpoint-1764906114",
+  "endpoint_config_name": "mme-demo-config-1764906114",
+  "model_name": "mme-demo-model-1764906114",
+  "models": [
+    "model_conservative",
+    "model_balanced",
+    "model_aggressive",
+    "model_deep",
+    "model_fast"
+  ]
+}

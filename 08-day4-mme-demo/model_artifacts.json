@@ -1,0 +1,7 @@
+{
+  "model_conservative": "s3://sagemaker-us-east-2-854757836160/mme-demo/models/model_conservative/mme-model-conservative-2025-12-05-00-14-57-483/output/model.tar.gz",
+  "model_balanced": "s3://sagemaker-us-east-2-854757836160/mme-demo/models/model_balanced/mme-model-balanced-2025-12-05-00-17-43-253/output/model.tar.gz",
+  "model_aggressive": "s3://sagemaker-us-east-2-854757836160/mme-demo/models/model_aggressive/mme-model-aggressive-2025-12-05-00-20-34-811/output/model.tar.gz",
+  "model_deep": "s3://sagemaker-us-east-2-854757836160/mme-demo/models/model_deep/mme-model-deep-2025-12-05-00-23-20-221/output/model.tar.gz",
+  "model_fast": "s3://sagemaker-us-east-2-854757836160/mme-demo/models/model_fast/mme-model-fast-2025-12-05-00-26-05-647/output/model.tar.gz"
+}
